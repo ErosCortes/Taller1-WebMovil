@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoreo Seguridad - Login</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0A2540",
+                        secondary: "#00B4D8",
+                        light: "#90E0EF"
+                    },
+                    fontFamily: {
+                        roboto: ['Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body class="bg-gray-100 font-roboto">
+
+    
+    <div class="min-h-screen flex">
+
+        
+        <div class="hidden md:flex w-1/2 bg-primary text-white flex-col justify-center items-center p-10">
+
+            <h1 class="text-4xl font-bold mb-4">
+                Monitoreo de Seguridad
+            </h1>
+
+            <p class="text-lg text-center max-w-md">
+                Plataforma para reportar hallazgos, monitorear riesgos
+                y mejorar la seguridad en faenas mineras.
+            </p>
+
+        
+
+        </div>
+
+        <div class="w-full md:w-1/2 flex justify-center items-center">
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg w-96">
+
+                <h2 class="text-2xl font-bold text-center text-primary mb-6">
+                    Iniciar Sesión
+                </h2>
+
+               
+                <form id="loginForm" class="space-y-4">
+
+          
+                    <div>
+                        <label class="block text-sm mb-1">Correo</label>
+                        <input type="email" id="email"
+                            class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="correo@empresa.cl"
+                            required>
+                    </div>
+
+                    
+                    <div>
+                        <label class="block text-sm mb-1">Contraseña</label>
+                        <input type="password" id="password"
+                            class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="********"
+                            required>
+                    </div>
+
+
+                    <button type="submit"
+                        class="w-full bg-secondary text-white py-2 rounded-lg hover:bg-cyan-600 transition">
+                        Ingresar
+                    </button>
+
+                </form>
+
+                
+                <p id="mensaje" class="text-red-500 text-sm mt-3 text-center"></p>
+
+                
+                <p class="text-sm text-center mt-4">
+                    ¿No tienes cuenta?
+                    <a href="register.html" class="text-secondary font-semibold">
+                        Regístrate
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

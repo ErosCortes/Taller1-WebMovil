@@ -1,0 +1,138 @@
+<DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - Monitoreo Seguridad</title>
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+<script>
+    tailwind.config = {
+        theme:{
+            extend:{
+                colors:{
+                    primary: "#0A2540",
+                    secondary: "#00B4D8",
+                    light: "#90E0EF"
+                },
+                fontFamily:{
+                    robotoCondensed: ['Roboto Condensed', 'sans-serif']
+                }
+            }
+        }
+    }
+</script>
+
+</head>
+
+<body class="bg-gray-100 font-robotoCondensed">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-primary text-white flex flex-col">
+            <div class="p-6 text 2xl font-bold border-b border-gray-600">
+                Seguridad
+            </div>
+
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="dashboard.html" class="block p-2 rounded-lg bg-secondary">📊 Dashboard</a>
+                <a href="reportes.html" class="block p-2 rounded-lg bg-secondary">⚠️ Reportar Hallazgo</a>
+                <a href="mapa.html" class="block p-2 rounded-lg bg-secondary">🗺️ Mapa</a>
+            </nav>
+
+            <div class="p-4 border-t border-gray-500">
+                <button id="logout"
+                class="w-full bg-red-500 py-2 rounded hover:bg-red-600 transition">
+                Cerar sesión
+                </button>
+            </div>
+            
+        </aside>
+
+        <div class="flex-1 flex flex-col">
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-primary">
+                    Dashboard
+                </h1>
+                <div class="flex items-center gap-3">
+                    <span id="userName" class="text-sm">Usuario</span>
+                    <img id="userImage"
+                    src="https://via.placeholder.com/40"
+                    class="w-10 h-10 rounded-full object-cover border">
+                </div>
+            </header>
+
+            <main class="p-6 space-y-6 overflow-auto">
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                        <h2 class="text-gray-500 text-sm">Total Reportes</h2>
+                        <p id="total" class="text-3xl font-bold text-primary">0</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                        <h2 class="text-gray-500 text-sm">Riesgo Alto</h2>
+                        <p id="altos" class="text-3xl font-bold text-red-500">0</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                        <h2 class="text-gray-500 text-sm">Riesgo Bajo</h2>
+                        <p id="bajos" class="text-3xl font-bold text-green-500">0</p>
+                    </div>
+
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl-shadow">
+                        <h2 class="text-lg font-bold text-primary mb-4">
+                            Reportes por Nivel de Riesgo
+                        </h2>
+                        <canvas id="graficoRiesgo"></canvas>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow">
+                        <h2 class="text-lg font-bold text-primary mb-4">
+                            Reportes por dia
+                        </h2>
+                        <canvas id="graficoTiempo"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-primary">
+                            Reportes Recientes
+                        </h2>
+                        <a href="reportes.html"
+                        class="text-sm bg-secondary text-white px-3 py-1 rounded hover:bg-cyan-600">
+                            + Nuevo
+                        </a>
+                    </div>
+
+                    <div id="listaDashboard" class="space-y-3">
+
+                    </div>
+                </div>
+
+
+            </main>
+
+
+
+
+
+        </div>
+    </div>
+
+</body>
+
+
+</html>
