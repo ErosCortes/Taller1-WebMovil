@@ -1,0 +1,20 @@
+{
+  "reportes": [
+    {
+      "id": 1,
+      "fecha": "2026-04-25T10:00:00",
+      "descripcion": "Cable suelto en pasillo",
+      "riesgo": "alto",
+      "imagen": "",
+      "estado": "pendiente"
+    },
+    {
+      "id": 2,
+      "fecha": "2026-04-25T11:00:00",
+      "descripcion": "Piso mojado",
+      "riesgo": "bajo",
+      "imagen": "",
+      "estado": "solucionado"
+    }
+  ]
+}
