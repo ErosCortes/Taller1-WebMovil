@@ -6,7 +6,8 @@
       "descripcion": "Cable suelto en pasillo",
       "riesgo": "alto",
       "imagen": "",
-      "estado": "pendiente"
+      "estado": "pendiente",
+      "zona": "Tunel A"
     },
     {
       "id": 2,
@@ -14,7 +15,8 @@
       "descripcion": "Piso mojado",
       "riesgo": "bajo",
       "imagen": "",
-      "estado": "solucionado"
+      "estado": "solucionado",
+      "zona": "Zona Sur"
     }
   ]
 }
