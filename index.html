@@ -105,4 +105,28 @@
 
 
 </body>
+
+
+<script>
+
+
+let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+
+
+if(!usuarios){
+    usuarios = [];
+}
+
+
+const existeAdmin = usuarios.some(u => u.email === "admin@ejemplo.cl");
+if(!existeAdmin){
+    usuarios.push({
+        nombre: "Admin",
+        email: "admin@ejemplo.cl",
+        password: "1234"
+    });
+}
+
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
+</script>
 </html>

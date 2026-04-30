@@ -53,25 +53,24 @@
         </div>
     </aside>
 
-    <!-- CONTENIDO -->
+    
     <div class="flex-1 flex flex-col">
 
-        <!-- HEADER -->
         <header class="bg-white shadow p-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-primary">
                 Dashboard
             </h1>
             <div class="flex items-center gap-3">
-                <span class="text-sm">Usuario</span>
+                <span class="text-sm" id="nombreUsuario"></span>
                 <img src="https://via.placeholder.com/40"
                 class="w-10 h-10 rounded-full object-cover border">
             </div>
         </header>
 
-        <!-- MAIN -->
+        
         <main class="p-6 space-y-6 overflow-auto">
 
-            <!-- TARJETAS -->
+            <!-- Tarjetas -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
@@ -91,7 +90,7 @@
 
             </div>
 
-            <!-- GRAFICOS -->
+            <!-- Graficos Dashboard -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <div class="bg-white p-6 rounded-xl shadow">
@@ -110,7 +109,7 @@
 
             </div>
 
-            <!-- LISTA -->
+          
             <div class="bg-white p-6 rounded-xl shadow">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-bold text-primary">
@@ -130,14 +129,17 @@
     </div>
 </div>
 
-<!-- ================== JAVASCRIPT ================== -->
+
 
 <script>
+    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
+    if(!usuarioActivo){
+        window.location.href = "index.html";
+    }
+    document.getElementById("nombreUsuario").textContent = usuarioActivo.nombre;
+    async function cargarDashboard(){
 
-async function cargarDashboard(){
-
-    // JSON
     let reportesJSON = [];
     try {
         const res = await fetch("reportes.json");
@@ -145,15 +147,14 @@ async function cargarDashboard(){
         reportesJSON = data.reportes;
     } catch {}
 
-    // localStorage
     let reportesLocal = JSON.parse(localStorage.getItem("reportes")) || [];
 
     // combinar
     let reportes = [...reportesJSON, ...reportesLocal];
     
-    // ===== REPORTES ÚLTIMOS 7 DÍAS =====
+ 
 
-    // 1. generar días
+    //generar días
     const hoy = new Date();
     const dias = [];
 
@@ -168,7 +169,7 @@ async function cargarDashboard(){
         dias.push(clave);
     }
 
-    // 2. contar reportes
+    //contar reportes
     const reportesPorDia = {};
 
     reportes.forEach(r => {
@@ -185,10 +186,8 @@ async function cargarDashboard(){
         reportesPorDia[clave]++;
     });
 
-    // 3. crear valores finales
     const valores = dias.map(d => reportesPorDia[d] || 0);
 
-    // ===== CONTADORES =====
     let total = reportes.length;
     let altos = 0;
     let medios = 0;
@@ -204,7 +203,6 @@ async function cargarDashboard(){
     document.getElementById("altos").textContent = altos;
     document.getElementById("bajos").textContent = bajos;
 
-    // ===== LISTA =====
     const lista = document.getElementById("listaDashboard");
     lista.innerHTML = "";
 
@@ -286,14 +284,8 @@ function dibujarGraficoRiesgo(altos, bajos, medios){
     const max = Math.max(5, maxDatos);
     const padding = 40;
     const cantidad = datos.length;
-
-    // ancho disponible real
     const anchoDisponible = canvas.width - padding * 2;
-
-    // ancho de cada barra (automático)
     const anchoBarra = anchoDisponible / cantidad * 0.6;
-
-    // espacio entre barras
     const espacio = (anchoDisponible / cantidad) * 0.4;
     const base = canvas.height - 40;
 
@@ -316,12 +308,12 @@ function dibujarGraficoRiesgo(altos, bajos, medios){
         ctx.fillStyle = d.color;
         ctx.fillRect(x, y, anchoBarra, altura);
 
-        // valor arriba de la barra
+        // Para que se vea el valor arriba de la barra
         ctx.fillStyle = "#000";
         ctx.font = "bold 14px sans-serif";
         ctx.fillText(d.valor, x + 20, y - 5);
 
-        // etiqueta abajo 
+        // Para que se vea la etiqueta abajo de la barra 
         ctx.fillText(d.label, x + 10, base + 20);
     });
 }
@@ -344,7 +336,6 @@ function dibujarGraficoTiempo(dias, valores){
     const anchoBarra = (anchoDisponible / cantidad) * 0.6;
     const espacio = (anchoDisponible / cantidad) * 0.4;
 
-    // eje
     ctx.beginPath();
     ctx.moveTo(margen, base);
     ctx.lineTo(canvas.width - margen, base);
@@ -356,16 +347,15 @@ function dibujarGraficoTiempo(dias, valores){
         const altura = (valores[i] / max) * 150;
         const y = base - altura;
 
-        // barra
         ctx.fillStyle = "#0A2540";
         ctx.fillRect(x, y, anchoBarra, altura);
 
-        // valor
+
         ctx.fillStyle = "#000";
         ctx.font = "12px sans-serif";
         ctx.fillText(valores[i], x + 5, y - 5);
 
-        // fecha bonita
+        // Para que se vea en formato DD/MM en la barra
         const fechaObj = new Date(dia);
         const texto = fechaObj.toLocaleDateString("es-CL", {
             day: "2-digit",
@@ -376,7 +366,6 @@ function dibujarGraficoTiempo(dias, valores){
     });
 }
 
-// iniciar
 cargarDashboard();
 </script>
 
